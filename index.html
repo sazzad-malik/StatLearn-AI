@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StatLearn AI | Competency Gap Analysis & Personalized Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .nav-link.active { color: #0f766e; border-bottom: 2px solid #0f766e; }
+    .card { transition: box-shadow 0.2s, transform 0.2s; }
+    .card:hover { box-shadow: 0 8px 24px -6px rgba(0,0,0,0.1); }
+    .fade { animation: fadeIn 0.35s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .progress { transition: width 0.7s ease; }
+    .option { cursor: pointer; transition: all 0.15s; }
+    .option:hover { border-color: #0d9488; background: #f0fdfa; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-teal-700 text-white flex items-center justify-center font-bold text-sm">SL</div>
+        <div>
+          <div class="font-semibold text-slate-900 leading-tight">StatLearn AI</div>
+          <div class="text-[11px] text-slate-500 leading-tight">AI Competency & Learning Platform</div>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <button class="nav-link active pb-0.5" data-page="home">Home</button>
+        <button class="nav-link pb-0.5" data-page="assess">Assessment</button>
+        <button class="nav-link pb-0.5" data-page="gaps">Gap Analysis</button>
+        <button class="nav-link pb-0.5" data-page="courses">Recommendations</button>
+        <button class="nav-link pb-0.5" data-page="quiz">Quiz Generator</button>
+        <button class="nav-link pb-0.5" data-page="dash">Dashboard</button>
+      </nav>
+      <div class="flex items-center gap-2 text-xs text-slate-500">
+        <span class="hidden sm:inline px-2 py-1 bg-slate-100 rounded">Demo Mode</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8">
+
+    <section id="home" class="page fade">
+      <div class="bg-teal-800 rounded-2xl p-8 md:p-10 text-white mb-8">
+        <p class="text-teal-200 text-sm font-medium mb-2">For India's Official Statistical System</p>
+        <h1 class="text-2xl md:text-3xl font-bold mb-3 leading-snug">Identify competency gaps. Get personalized training. Generate assessments from your materials.</h1>
+        <p class="text-teal-100 text-sm md:text-base mb-6">AI-assisted platform aligned with role-based competencies and iGOT Karmayogi ecosystem for statistical officials.</p>
+        <div class="flex flex-wrap gap-3">
+          <button onclick="go('assess')" class="bg-white text-teal-900 font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-teal-50">Start Assessment</button>
+          <button onclick="go('quiz')" class="border border-white/40 text-white font-medium px-5 py-2.5 rounded-lg text-sm hover:bg-white/10">Generate Quiz</button>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white rounded-xl border border-slate-200 p-5 card">
+          <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center mb-3"><i class="fas fa-clipboard-list"></i></div>
+          <h3 class="font-semibold text-sm mb-1">Role-based Assessment</h3>
+          <p class="text-xs text-slate-500">Job role + experience + current skills</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 card">
+          <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center mb-3"><i class="fas fa-chart-pie"></i></div>
+          <h3 class="font-semibold text-sm mb-1">AI Gap Analysis</h3>
+          <p class="text-xs text-slate-500">Missing competencies mapped to role</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 card">
+          <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center mb-3"><i class="fas fa-graduation-cap"></i></div>
+          <h3 class="font-semibold text-sm mb-1">iGOT Recommendations</h3>
+          <p class="text-xs text-slate-500">Personalized courses from ecosystem</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 card">
+          <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center mb-3"><i class="fas fa-question-circle"></i></div>
+          <h3 class="font-semibold text-sm mb-1">MCQ / Quiz Generator</h3>
+          <p class="text-xs text-slate-500">From uploaded learning materials</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+        <h3 class="font-semibold text-sm mb-3 text-slate-700">Learner Journey</h3>
+        <div class="flex flex-wrap items-center gap-2 text-xs font-medium">
+          <span class="bg-teal-700 text-white px-3 py-1.5 rounded-full">1. Profile & Role</span>
+          <span class="text-slate-300">→</span>
+          <span class="bg-teal-700 text-white px-3 py-1.5 rounded-full">2. Assessment</span>
+          <span class="text-slate-300">→</span>
+          <span class="bg-teal-700 text-white px-3 py-1.5 rounded-full">3. Gap Analysis</span>
+          <span class="text-slate-300">→</span>
+          <span class="bg-teal-700 text-white px-3 py-1.5 rounded-full">4. iGOT Courses</span>
+          <span class="text-slate-300">→</span>
+          <span class="bg-teal-700 text-white px-3 py-1.5 rounded-full">5. Quiz & Feedback</span>
+          <span class="text-slate-300">→</span>
+          <span class="bg-teal-700 text-white px-3 py-1.5 rounded-full">6. Progress</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="assess" class="page hidden fade">
+      <h2 class="text-xl font-bold mb-1">Skill Assessment</h2>
+      <p class="text-sm text-slate-500 mb-6">Select role and current competencies to identify gaps</p>
+      <div class="bg-white rounded-xl border border-slate-200 p-6 max-w-xl space-y-5">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">Job Role</label>
+          <select id="role" class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <option value="jso">Junior Statistical Officer (JSO)</option>
+            <option value="so">Statistical Officer</option>
+            <option value="sso">Senior Statistical Officer</option>
+            <option value="dd">Deputy Director (Statistics)</option>
+            <option value="analyst">Data Analyst</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">Experience</label>
+          <select id="exp" class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <option>0–2 years</option>
+            <option selected>2–5 years</option>
+            <option>5–10 years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2">Current Competencies (self-rated)</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm" id="skillChecks"></div>
+        </div>
+        <button onclick="runAssess()" class="w-full bg-teal-700 hover:bg-teal-800 text-white font-semibold py-2.5 rounded-lg text-sm transition">Run Gap Analysis</button>
+      </div>
+    </section>
+
+    <section id="gaps" class="page hidden fade">
+      <h2 class="text-xl font-bold mb-1">Competency Gap Analysis</h2>
+      <p class="text-sm text-slate-500 mb-6">Gaps relative to selected role requirements</p>
+      <div id="gapBox" class="space-y-3">
+        <div class="bg-amber-50 border border-amber-200 text-amber-800 text-sm rounded-xl p-4">
+          Complete the <button onclick="go('assess')" class="underline font-medium">Assessment</button> to view gaps.
+        </div>
+      </div>
+    </section>
+
+    <section id="courses" class="page hidden fade">
+      <h2 class="text-xl font-bold mb-1">Personalized Recommendations</h2>
+      <p class="text-sm text-slate-500 mb-6">Courses mapped to gaps (iGOT-style mock integration)</p>
+      <div id="courseBox" class="grid sm:grid-cols-2 gap-4">
+        <div class="bg-slate-100 text-slate-500 text-sm rounded-xl p-6 text-center col-span-full">Run assessment to get recommendations.</div>
+      </div>
+    </section>
+
+    <section id="quiz" class="page hidden fade">
+      <h2 class="text-xl font-bold mb-1">AI Quiz / MCQ Generator</h2>
+      <p class="text-sm text-slate-500 mb-6">Paste learning material → generate objective questions</p>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <label class="block text-sm font-medium text-slate-700 mb-2">Learning material</label>
+          <textarea id="mat" rows="11" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">National Sample Survey (NSS) is conducted by the National Sample Survey Office (NSSO) under MoSPI. It provides data on employment, unemployment, consumer expenditure and social consumption. The sampling design uses multi-stage stratified sampling. Key labour force indicators include Labour Force Participation Rate (LFPR), Worker Population Ratio (WPR) and Unemployment Rate (UR). Periodic Labour Force Survey (PLFS) is the current regular survey for labour force statistics in India.</textarea>
+          <div class="mt-3 flex gap-2">
+            <select id="qcount" class="border border-slate-300 rounded-lg px-3 py-2 text-sm">
+              <option value="3">3 Qs</option>
+              <option value="5" selected>5 Qs</option>
+            </select>
+            <button onclick="genQuiz()" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white font-semibold py-2 rounded-lg text-sm">Generate MCQs</button>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <h3 class="font-semibold text-sm mb-3">Generated Questions</h3>
+          <div id="quizBox" class="space-y-3 text-sm"><p class="text-slate-400">Questions will appear here.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dash" class="page hidden fade">
+      <h2 class="text-xl font-bold mb-1">Learner Dashboard</h2>
+      <p class="text-sm text-slate-500 mb-6">Competency overview and learning path</p>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white rounded-xl border border-slate-200 p-4 text-center">
+          <div class="text-2xl font-bold text-teal-700" id="dScore">—</div>
+          <div class="text-xs text-slate-500 mt-1">Competency Match</div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4 text-center">
+          <div class="text-2xl font-bold text-amber-600" id="dGaps">—</div>
+          <div class="text-xs text-slate-500 mt-1">Open Gaps</div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4 text-center">
+          <div class="text-2xl font-bold text-indigo-600" id="dCourses">—</div>
+          <div class="text-xs text-slate-500 mt-1">Recommended</div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4 text-center">
+          <div class="text-2xl font-bold text-emerald-600">—</div>
+          <div class="text-xs text-slate-500 mt-1">Quiz Avg.</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+        <h3 class="font-semibold text-sm mb-4">Suggested Learning Path</h3>
+        <div id="pathBox" class="space-y-3 text-sm text-slate-500">Complete assessment to see path.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 mt-10 py-5 text-center text-xs text-slate-400">
+    StatLearn AI · Prototype for capacity building in Official Statistical System · Mock iGOT integration
+  </footer>
+
+  <script>
+    const ALL_SKILLS = [
+      'Survey Design & Sampling','Data Collection Methods','Statistical Software (R / SPSS)',
+      'National Accounts','Data Visualization','Official Statistics Framework',
+      'SDG Indicators','Statistical Report Writing','Price Statistics','Labour Statistics'
+    ];
+    const ROLE_REQ = {
+      jso: ['Survey Design & Sampling','Data Collection Methods','Statistical Software (R / SPSS)','Official Statistics Framework','Statistical Report Writing','Data Visualization'],
+      so: ['Survey Design & Sampling','National Accounts','Statistical Software (R / SPSS)','Official Statistics Framework','SDG Indicators','Statistical Report Writing'],
+      sso: ['National Accounts','SDG Indicators','Official Statistics Framework','Survey Design & Sampling','Data Visualization','Labour Statistics'],
+      dd: ['National Accounts','SDG Indicators','Official Statistics Framework','Survey Design & Sampling','Price Statistics'],
+      analyst: ['Statistical Software (R / SPSS)','Data Visualization','Data Collection Methods','Statistical Report Writing','Labour Statistics']
+    };
+    const CATALOG = {
+      'Survey Design & Sampling': { title: 'Survey Design & Sampling Methods', hrs: '6h', level: 'Intermediate', tag: 'Domain' },
+      'Data Collection Methods': { title: 'Modern Data Collection Techniques', hrs: '4h', level: 'Beginner', tag: 'Functional' },
+      'Statistical Software (R / SPSS)': { title: 'Statistical Computing with R & SPSS', hrs: '10h', level: 'Intermediate', tag: 'Technical' },
+      'National Accounts': { title: 'National Accounts Statistics Framework', hrs: '8h', level: 'Advanced', tag: 'Domain' },
+      'Data Visualization': { title: 'Data Visualization for Official Statistics', hrs: '5h', level: 'Intermediate', tag: 'Technical' },
+      'Official Statistics Framework': { title: 'Fundamentals of Official Statistics', hrs: '7h', level: 'Beginner', tag: 'Domain' },
+      'SDG Indicators': { title: 'SDG Monitoring & Indicator Framework', hrs: '6h', level: 'Intermediate', tag: 'Domain' },
+      'Statistical Report Writing': { title: 'Statistical Report Writing & Dissemination', hrs: '4h', level: 'Beginner', tag: 'Functional' },
+      'Price Statistics': { title: 'Price Statistics & CPI Compilation', hrs: '5h', level: 'Intermediate', tag: 'Domain' },
+      'Labour Statistics': { title: 'Labour Force Statistics & PLFS', hrs: '6h', level: 'Intermediate', tag: 'Domain' }
+    };
+
+    let gaps = [], matchPct = 0;
+    const skEl = document.getElementById('skillChecks');
+    ALL_SKILLS.forEach((s, i) => {
+      skEl.innerHTML += '<label class="flex items-center gap-2 p-2 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer"><input type="checkbox" class="skill" value="'+s+'" '+(i<3?'checked':'')+'> '+s+'</label>';
+    });
+
+    function go(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      const el = document.getElementById(id);
+      el.classList.remove('hidden');
+      el.classList.add('fade');
+      document.querySelectorAll('.nav-link').forEach(n => n.classList.toggle('active', n.dataset.page === id));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    document.querySelectorAll('.nav-link').forEach(btn => btn.addEventListener('click', () => go(btn.dataset.page)));
+
+    function runAssess() {
+      const role = document.getElementById('role').value;
+      const selected = Array.from(document.querySelectorAll('.skill:checked')).map(c => c.value);
+      const required = ROLE_REQ[role] || ROLE_REQ.jso;
+      gaps = required.filter(r => !selected.includes(r));
+      const covered = required.filter(r => selected.includes(r)).length;
+      matchPct = Math.round((covered / required.length) * 100);
+
+      let html = '<div class="bg-white rounded-xl border border-slate-200 p-4 flex items-center justify-between flex-wrap gap-3 mb-2"><div><div class="font-semibold">'+document.getElementById('role').selectedOptions[0].text+'</div><div class="text-xs text-slate-500">Assessment complete</div></div><div class="text-right"><div class="text-2xl font-bold text-teal-700">'+matchPct+'%</div><div class="text-xs text-slate-500">Match with role</div></div></div>';
+      if (!gaps.length) {
+        html += '<div class="bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm rounded-xl p-4">No significant gaps for this role.</div>';
+      } else {
+        html += '<p class="text-sm font-medium text-slate-700 mt-2 mb-2">Identified gaps ('+gaps.length+')</p>';
+        gaps.forEach(g => {
+          const high = ['National Accounts','SDG Indicators','Survey Design & Sampling'].includes(g);
+          html += '<div class="bg-white rounded-xl border border-slate-200 p-4 flex gap-3"><div class="w-9 h-9 rounded-lg '+(high?'bg-red-50 text-red-600':'bg-amber-50 text-amber-600')+' flex items-center justify-center flex-shrink-0 text-sm"><i class="fas fa-exclamation"></i></div><div class="flex-1 min-w-0"><div class="font-medium text-sm">'+g+'</div><div class="text-xs text-slate-500 mb-1.5">Severity: '+(high?'High':'Medium')+'</div><div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full '+(high?'bg-red-500':'bg-amber-500')+' progress" style="width:'+(high?80:55)+'%"></div></div></div></div>';
+        });
+      }
+      html += '<div class="pt-2"><button onclick="go(\'courses\')" class="bg-teal-700 hover:bg-teal-800 text-white text-sm font-medium px-4 py-2 rounded-lg">View Recommendations →</button></div>';
+      document.getElementById('gapBox').innerHTML = html;
+
+      const list = gaps.length ? gaps : required.slice(0, 3);
+      let cHtml = '';
+      list.forEach(g => {
+        const c = CATALOG[g];
+        if (!c) return;
+        cHtml += '<div class="bg-white rounded-xl border border-slate-200 p-4 card"><div class="flex justify-between items-start gap-2 mb-2"><span class="text-[10px] font-semibold uppercase tracking-wide text-teal-700 bg-teal-50 px-2 py-0.5 rounded">'+c.tag+'</span><span class="text-[10px] text-slate-400">iGOT-style</span></div><h3 class="font-semibold text-sm mb-1">'+c.title+'</h3><p class="text-xs text-slate-500 mb-3">'+c.hrs+' · '+c.level+'</p><div class="flex gap-2"><button class="text-xs bg-teal-700 text-white px-3 py-1.5 rounded-lg hover:bg-teal-800">Enroll (Demo)</button><button class="text-xs border border-slate-300 px-3 py-1.5 rounded-lg hover:bg-slate-50">Details</button></div></div>';
+      });
+      document.getElementById('courseBox').innerHTML = cHtml || '<p class="text-slate-500 text-sm">No courses.</p>';
+
+      document.getElementById('dScore').textContent = matchPct + '%';
+      document.getElementById('dGaps').textContent = gaps.length;
+      document.getElementById('dCourses').textContent = list.length;
+      let pHtml = '';
+      list.forEach((g, i) => {
+        pHtml += '<div class="flex items-center gap-3"><div class="w-7 h-7 rounded-full '+(i===0?'bg-teal-700 text-white':'bg-slate-200 text-slate-600')+' flex items-center justify-center text-xs font-semibold">'+(i+1)+'</div><div class="flex-1"><div class="font-medium text-slate-800">'+(CATALOG[g]?.title||g)+'</div><div class="h-1 bg-slate-100 rounded-full mt-1 overflow-hidden"><div class="h-full bg-teal-600 progress" style="width:'+(i===0?35:0)+'%"></div></div></div></div>';
+      });
+      document.getElementById('pathBox').innerHTML = pHtml;
+      go('gaps');
+    }
+
+    function genQuiz() {
+      const n = +document.getElementById('qcount').value || 5;
+      const bank = [
+        { q: 'Which body conducts the National Sample Survey (NSS)?', opts: ['NITI Aayog','NSSO under MoSPI','RBI','Ministry of Labour'], a: 1 },
+        { q: 'What sampling design is primarily used in NSS?', opts: ['Simple random','Multi-stage stratified sampling','Only cluster sampling','Complete census'], a: 1 },
+        { q: 'Which is a key labour force indicator from PLFS?', opts: ['GDP growth','Labour Force Participation Rate (LFPR)','Fiscal deficit','CPI inflation'], a: 1 },
+        { q: 'PLFS is mainly used for:', opts: ['Price statistics','Labour force statistics','Agricultural production','Foreign trade'], a: 1 },
+        { q: 'NSS provides data on:', opts: ['Only employment','Employment, unemployment, consumer expenditure & social consumption','Only CPI','Only industrial output'], a: 1 }
+      ];
+      const qs = bank.slice(0, n);
+      let html = '';
+      qs.forEach((item, i) => {
+        html += '<div class="border border-slate-200 rounded-lg p-3"><div class="font-medium mb-2">Q'+(i+1)+'. '+item.q+'</div><div class="space-y-1.5">'+item.opts.map((o,j)=>'<label class="option flex items-center gap-2 p-2 rounded border border-slate-200 text-sm"><input type="radio" name="q'+i+'" value="'+j+'"> '+o+'</label>').join('')+'</div></div>';
+      });
+      html += '<button onclick="scoreQuiz()" class="w-full mt-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-medium py-2.5 rounded-lg">Check answers</button><div id="scoreMsg" class="text-center font-medium mt-2 text-sm"></div>';
+      document.getElementById('quizBox').innerHTML = html;
+      window._ans = qs.map(q => q.a);
+    }
+
+    function scoreQuiz() {
+      let c = 0;
+      window._ans.forEach((a, i) => {
+        const sel = document.querySelector('input[name="q'+i+'"]:checked');
+        if (sel && +sel.value === a) c++;
+      });
+      const pct = Math.round((c / window._ans.length) * 100);
+      document.getElementById('scoreMsg').innerHTML = 'Score: <span class="text-teal-700">'+c+'/'+window._ans.length+' ('+pct+'%)</span>';
+    }
+
+    go('home');
+  </script>
+</body>
+</html>
